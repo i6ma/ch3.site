@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>警告</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="warning"><span class="emb">警告：</span>本站仅供技术员做开发测试之用</div>
+      <div class="suggest">
+        如果您不小心打开本站，请<span class="closenow" onclick="window.close();">立即关闭</span>！
+      </div>
+    </div>
+    <div class="content">
+      <h1>测试专用网站</h1>
+      <p></p>
+
+      <div class="ch3holder">
+        <div class="molecule">
+          <div class="atom hydrogen top"></div>
+          <div class="bonbox hfd"><div class="atom carbon"></div></div>
+          <div class="atom hydrogen a1"></div>
+          <div class="atom hydrogen a2"></div>
+          <div class="atom hydrogen a3"></div>
+          <div class="bonbox"><div class="atom carbon"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a class="icpno" href="https://beian.miit.gov.cn/">粤ICP备2025380197号-1</a>
+    </div>
+  </body>
+</html>
+
+<style>
+  html {
+    color-scheme: light dark;
+  }
+  html,
+  body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+
+  .header {
+    text-align: center;
+  }
+  .header .warning {
+    padding: 6px;
+    color: #fff;
+    background: #a30;
+  }
+  .header .warning .emb {
+    font-weight: 400;
+    color: #6cf;
+  }
+  .header .suggest {
+    margin: 10px;
+    font-weight: 400;
+    color: #a30;
+  }
+  .header .closenow {
+    margin: 6px;
+    padding: 6px;
+    border-radius: 5px;
+    color: #6cf;
+    background: #a30;
+    cursor: pointer;
+  }
+
+  .content {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  .footer {
+    padding: 4px;
+    text-align: center;
+    background: #ccc;
+  }
+  .footer .icpno {
+    font-size: 12px;
+  }
+</style>
+
+<style>
+  .ch3holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+  }
+
+  .molecule {
+    position: relative;
+
+    .atom {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .atom::before,
+    .atom::after {
+      content: '';
+      position: absolute;
+      top: 15%;
+      left: 15%;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+    }
+    .atom::before {
+      width: 50%;
+      height: 50%;
+      filter: blur(2px);
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 70%);
+    }
+    .atom::after {
+      width: 25%;
+      height: 25%;
+    }
+
+    .carbon {
+      width: 72px;
+      height: 72px;
+      left: 0;
+      top: 0;
+      background: radial-gradient(circle at 30% 30%, #fff 0%, #666 30%, #333 70%);
+    }
+    .bonbox {
+      position: absolute;
+      overflow: hidden;
+      width: 72px;
+      height: 37px;
+      left: -36px;
+      top: -36px;
+    }
+    .bonbox.hfd {
+      top: -1px;
+      .carbon {
+        top: -35px;
+      }
+    }
+
+    .hydrogen {
+      width: 42px;
+      height: 42px;
+      left: -21px;
+      top: -7px;
+      background: radial-gradient(circle at 30% 30%, #0f0 0%, #060 60%, #030 90%);
+    }
+
+    .hydrogen {
+      animation: orbit 6s linear infinite;
+    }
+    .hydrogen.a2 {
+      animation-delay: -2s;
+    }
+    .hydrogen.a3 {
+      animation-delay: -4s;
+    }
+    .hydrogen.top {
+      animation: breathing 1s linear infinite;
+      top: -100px;
+    }
+  }
+
+  @keyframes breathing {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes orbit {
+    0% {
+      transform: translate(79px, 0px) scale(1);
+    }
+    5% {
+      transform: translate(75px, 12px) scale(1.04);
+    }
+    10% {
+      transform: translate(64px, 23px) scale(1.07);
+    }
+    15% {
+      transform: translate(46px, 32px) scale(1.1);
+    }
+    20% {
+      transform: translate(24px, 38px) scale(1.12);
+    }
+    25% {
+      transform: translate(0px, 40px) scale(1.13);
+    }
+    30% {
+      transform: translate(-24px, 38px) scale(1.12);
+    }
+    35% {
+      transform: translate(-46px, 32px) scale(1.1);
+    }
+    40% {
+      transform: translate(-64px, 23px) scale(1.07);
+    }
+    45% {
+      transform: translate(-75px, 12px) scale(1.04);
+    }
+    50% {
+      transform: translate(-79px, 0px) scale(1);
+    }
+    55% {
+      transform: translate(-75px, -12px) scale(0.96);
+    }
+    60% {
+      transform: translate(-64px, -23px) scale(0.93);
+    }
+    65% {
+      transform: translate(-46px, -32px) scale(0.9);
+    }
+    70% {
+      transform: translate(-24px, -38px) scale(0.88);
+    }
+    75% {
+      transform: translate(0px, -39px) scale(0.88);
+    }
+    80% {
+      transform: translate(24px, -38px) scale(0.88);
+    }
+    85% {
+      transform: translate(46px, -32px) scale(0.9);
+    }
+    90% {
+      transform: translate(64px, -23px) scale(0.93);
+    }
+    95% {
+      transform: translate(75px, -12px) scale(0.96);
+    }
+    100% {
+      transform: translate(79px, 0px) scale(1);
+    }
+  }
+</style>

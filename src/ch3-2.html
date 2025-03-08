@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>甲基</title>
+  </head>
+  <body>
+    <div class="ai-descs">
+      <p>
+        这个文件用css做出一些圆形，再添加一些背景填充效果，使它看起来像一个立体的圆球，以此来表示一个原子。我希望这些圆形看起来更像是立体的球形。
+      </p>
+      <p>
+        然后通过坐标定位，在中心位置显示一个碳原子，在碳原子上面显示一个氢原子，在碳原子稍下方的周围，再显示3个氢原子。用这些原子来表现一个甲烷分子模型。
+      </p>
+      <p>最后，通过添加CSS动画，使3个氢原子在碳原子周围绕圈运动，用以模拟甲烷分子在空间中的旋转。</p>
+      <p>
+        为了模拟在三维空间中的旋转，旋转过程中氢原子在前方时要遮挡碳原子，而转到后方时要被碳原子遮挡。特别将碳原子分为上下两半，上一半层级更高用于挡住后方的氢原子，下一半层级更低用于模拟被氢原子遮挡的效果。
+      </p>
+    </div>
+
+    <div class="ch3holder">
+      <div class="molecule">
+        <div class="bound"></div>
+        <div class="orbit"></div>
+        <div class="atom hydrogen top"></div>
+        <div class="bonbox hfd"><div class="atom carbon"></div></div>
+        <div class="atom hydrogen a1"></div>
+        <div class="atom hydrogen a2"></div>
+        <div class="atom hydrogen a3"></div>
+        <div class="bonbox"><div class="atom carbon"></div></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  .ch3holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+  }
+
+  .molecule {
+    position: relative;
+
+    .bound {
+      box-sizing: border-box;
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      left: -100px;
+      top: -115px;
+      border: 1px solid #999;
+    }
+    .orbit {
+      box-sizing: border-box;
+      position: absolute;
+      width: 200px;
+      height: 125px;
+      left: -100px;
+      top: -46px;
+      border: 1px solid #999;
+      border-radius: 50%;
+    }
+
+    .atom {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .atom::before,
+    .atom::after {
+      content: '';
+      position: absolute;
+      top: 15%;
+      left: 15%;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+    }
+    .atom::before {
+      width: 50%;
+      height: 50%;
+      filter: blur(2px);
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 70%);
+    }
+    .atom::after {
+      width: 25%;
+      height: 25%;
+    }
+
+    .carbon {
+      width: 72px;
+      height: 72px;
+      left: 0;
+      top: 0;
+      background: radial-gradient(circle at 30% 30%, #fff 0%, #666 30%, #333 70%);
+    }
+    .bonbox {
+      position: absolute;
+      overflow: hidden;
+      width: 72px;
+      height: 37px;
+      left: -36px;
+      top: -36px;
+    }
+    .bonbox.hfd {
+      top: -1px;
+      .carbon {
+        top: -35px;
+      }
+    }
+
+    .hydrogen {
+      width: 42px;
+      height: 42px;
+      left: -21px;
+      top: -7px;
+      background: radial-gradient(circle at 30% 30%, #0f0 0%, #060 60%, #030 90%);
+    }
+
+    .hydrogen {
+      animation: orbit 6s linear infinite;
+    }
+    .hydrogen.a2 {
+      animation-delay: -2s;
+    }
+    .hydrogen.a3 {
+      animation-delay: -4s;
+    }
+    .hydrogen.top {
+      animation: breathing 1s linear infinite;
+      top: -100px;
+    }
+  }
+
+  @keyframes breathing {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes orbit {
+    0% {
+      transform: translate(79px, 0px) scale(1);
+    }
+    5% {
+      transform: translate(75px, 12px) scale(1.04);
+    }
+    10% {
+      transform: translate(64px, 23px) scale(1.07);
+    }
+    15% {
+      transform: translate(46px, 32px) scale(1.1);
+    }
+    20% {
+      transform: translate(24px, 38px) scale(1.12);
+    }
+    25% {
+      transform: translate(0px, 40px) scale(1.13);
+    }
+    30% {
+      transform: translate(-24px, 38px) scale(1.12);
+    }
+    35% {
+      transform: translate(-46px, 32px) scale(1.1);
+    }
+    40% {
+      transform: translate(-64px, 23px) scale(1.07);
+    }
+    45% {
+      transform: translate(-75px, 12px) scale(1.04);
+    }
+    50% {
+      transform: translate(-79px, 0px) scale(1);
+    }
+    55% {
+      transform: translate(-75px, -12px) scale(0.96);
+    }
+    60% {
+      transform: translate(-64px, -23px) scale(0.93);
+    }
+    65% {
+      transform: translate(-46px, -32px) scale(0.9);
+    }
+    70% {
+      transform: translate(-24px, -38px) scale(0.88);
+    }
+    75% {
+      transform: translate(0px, -39px) scale(0.88);
+    }
+    80% {
+      transform: translate(24px, -38px) scale(0.88);
+    }
+    85% {
+      transform: translate(46px, -32px) scale(0.9);
+    }
+    90% {
+      transform: translate(64px, -23px) scale(0.93);
+    }
+    95% {
+      transform: translate(75px, -12px) scale(0.96);
+    }
+    100% {
+      transform: translate(79px, 0px) scale(1);
+    }
+  }
+</style>
+
+<script>
+  const r = 100 - 21;
+  const numPoints = 20;
+  const points = [];
+
+  for (let i = 0; i <= numPoints; i++) {
+    const angle = (2 * Math.PI * i) / numPoints;
+    const x = Math.round(r * Math.cos(angle));
+    const y = Math.round((r / 2) * Math.sin(angle));
+    const s = Math.round((y * 100) / r / 4 + 100) / 100;
+    const t = Math.round((100 * i) / numPoints);
+    points.push(t + '% { transform: translate(' + x + 'px, ' + y + 'px) scale(' + s + '); }');
+  }
+
+  console.log(points.join('\n'));
+</script>

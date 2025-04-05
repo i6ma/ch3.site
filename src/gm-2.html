@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="globe">
+      <div class="meridian" style="animation-delay: -0s;"></div>
+      <div class="meridian" style="animation-delay: -3s;"></div>
+      <div class="meridian" style="animation-delay: -6s;"></div>
+      <div class="meridian" style="animation-delay: -9s;"></div>
+    </div>
+  </body>
+</html>
+
+<style>
+  .globe {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.4));
+  }
+
+  .meridian {
+    position: absolute;
+    box-sizing: border-box;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    border: 1px solid;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    animation: orbit 6s ease-in infinite;
+    animation-direction: alternate;
+  }
+
+  @keyframes orbit {
+    0% {
+      width: 100%;
+    }
+    100% {
+      width: 0%;
+    }
+  }
+</style>

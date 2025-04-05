@@ -2,8 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>警告</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./favicon.png" />
   </head>
   <body>
     <div class="header">
@@ -18,12 +19,19 @@
 
       <div class="ch3holder">
         <div class="molecule">
-          <div class="atom hydrogen top"></div>
+          <div class="hydrogen-top">
+            <div class="meridian" style="border-color: #ff4757; animation-delay: -1s;"></div>
+            <div class="meridian" style="border-color: #2ed573; animation-delay: -2s;"></div>
+            <div class="meridian" style="border-color: #3742fa; animation-delay: -3s;"></div>
+          </div>
           <div class="bonbox hfd"><div class="atom carbon"></div></div>
           <div class="atom hydrogen a1"></div>
           <div class="atom hydrogen a2"></div>
           <div class="atom hydrogen a3"></div>
           <div class="bonbox"><div class="atom carbon"></div></div>
+          <div class="transfy">
+            <a href="javascript:;">甲基</a>
+          </div>
         </div>
       </div>
     </div>
@@ -35,9 +43,6 @@
 </html>
 
 <style>
-  html {
-    color-scheme: light dark;
-  }
   html,
   body {
     min-height: 100%;
@@ -93,12 +98,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    height: 360px;
   }
 
   .molecule {
     position: relative;
-
+    top: 90px;
+    perspective: 1000px;
+    perspective-origin: center -400px;
+    .transfy {
+      position: absolute;
+      top: -130px;
+      white-space: nowrap;
+      font-size: 24px;
+      animation: rotatey 6s linear infinite;
+      &:hover {
+        animation: none;
+        transform: translate(-50%, -50%) rotateY(0deg);
+      }
+      a {
+        text-decoration: none;
+      }
+    }
     .atom {
       position: absolute;
       border-radius: 50%;
@@ -109,7 +130,6 @@
       position: absolute;
       top: 15%;
       left: 15%;
-      background: rgba(255, 255, 255, 0.3);
       border-radius: 50%;
     }
     .atom::before {
@@ -121,11 +141,12 @@
     .atom::after {
       width: 25%;
       height: 25%;
+      background: rgba(255, 255, 255, 0.3);
     }
 
     .carbon {
-      width: 72px;
-      height: 72px;
+      width: 82px;
+      height: 82px;
       left: 0;
       top: 0;
       background: radial-gradient(circle at 30% 30%, #fff 0%, #666 30%, #333 70%);
@@ -133,27 +154,24 @@
     .bonbox {
       position: absolute;
       overflow: hidden;
-      width: 72px;
-      height: 37px;
-      left: -36px;
-      top: -36px;
+      width: 82px;
+      height: 42px;
+      left: -41px;
+      top: -41px;
     }
     .bonbox.hfd {
       top: -1px;
       .carbon {
-        top: -35px;
+        top: -40px;
       }
     }
 
     .hydrogen {
-      width: 42px;
-      height: 42px;
-      left: -21px;
-      top: -7px;
+      width: 50px;
+      height: 50px;
+      left: -25px;
+      top: -14px;
       background: radial-gradient(circle at 30% 30%, #0f0 0%, #060 60%, #030 90%);
-    }
-
-    .hydrogen {
       animation: orbit 6s linear infinite;
     }
     .hydrogen.a2 {
@@ -162,89 +180,59 @@
     .hydrogen.a3 {
       animation-delay: -4s;
     }
-    .hydrogen.top {
-      animation: breathing 1s linear infinite;
-      top: -100px;
+
+    .hydrogen-top {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      left: -25px;
+      top: -112px;
+      filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.4));
+      .meridian {
+        position: absolute;
+        box-sizing: border-box;
+        height: 100%;
+        top: 0;
+        left: 50%;
+        border: 2px solid;
+        border-radius: 50%;
+        transform: translateX(-50%);
+        animation: meridian_orbit 1.5s ease-in infinite;
+        animation-direction: alternate;
+      }
     }
   }
 
-  @keyframes breathing {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 1;
-    }
-    75% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 0;
-    }
+  @keyframes meridian_orbit {
+    0% { width: 100%; }
+    100% { width: 0%; }
   }
+  @keyframes rotatey {
+    0% { transform: translate(-50%, -50%) rotateY(0deg); }
+    100% { transform: translate(-50%, -50%) rotateY(-360deg); }
+  }
+
   @keyframes orbit {
-    0% {
-      transform: translate(79px, 0px) scale(1);
-    }
-    5% {
-      transform: translate(75px, 12px) scale(1.04);
-    }
-    10% {
-      transform: translate(64px, 23px) scale(1.07);
-    }
-    15% {
-      transform: translate(46px, 32px) scale(1.1);
-    }
-    20% {
-      transform: translate(24px, 38px) scale(1.12);
-    }
-    25% {
-      transform: translate(0px, 40px) scale(1.13);
-    }
-    30% {
-      transform: translate(-24px, 38px) scale(1.12);
-    }
-    35% {
-      transform: translate(-46px, 32px) scale(1.1);
-    }
-    40% {
-      transform: translate(-64px, 23px) scale(1.07);
-    }
-    45% {
-      transform: translate(-75px, 12px) scale(1.04);
-    }
-    50% {
-      transform: translate(-79px, 0px) scale(1);
-    }
-    55% {
-      transform: translate(-75px, -12px) scale(0.96);
-    }
-    60% {
-      transform: translate(-64px, -23px) scale(0.93);
-    }
-    65% {
-      transform: translate(-46px, -32px) scale(0.9);
-    }
-    70% {
-      transform: translate(-24px, -38px) scale(0.88);
-    }
-    75% {
-      transform: translate(0px, -39px) scale(0.88);
-    }
-    80% {
-      transform: translate(24px, -38px) scale(0.88);
-    }
-    85% {
-      transform: translate(46px, -32px) scale(0.9);
-    }
-    90% {
-      transform: translate(64px, -23px) scale(0.93);
-    }
-    95% {
-      transform: translate(75px, -12px) scale(0.96);
-    }
-    100% {
-      transform: translate(79px, 0px) scale(1);
-    }
+    0% { transform: translate(75px, 0px) scale(1); }
+    5% { transform: translate(71px, 14px) scale(1.05); }
+    10% { transform: translate(61px, 26px) scale(1.09); }
+    15% { transform: translate(44px, 36px) scale(1.12); }
+    20% { transform: translate(23px, 42px) scale(1.14); }
+    25% { transform: translate(0px, 44px) scale(1.15); }
+    30% { transform: translate(-23px, 42px) scale(1.14); }
+    35% { transform: translate(-44px, 36px) scale(1.12); }
+    40% { transform: translate(-61px, 26px) scale(1.09); }
+    45% { transform: translate(-71px, 14px) scale(1.05); }
+    50% { transform: translate(-75px, 0px) scale(1); }
+    55% { transform: translate(-71px, -14px) scale(0.95); }
+    60% { transform: translate(-61px, -26px) scale(0.91); }
+    65% { transform: translate(-44px, -36px) scale(0.88); }
+    70% { transform: translate(-23px, -42px) scale(0.86); }
+    75% { transform: translate(0px, -44px) scale(0.85); }
+    80% { transform: translate(23px, -42px) scale(0.86); }
+    85% { transform: translate(44px, -36px) scale(0.88); }
+    90% { transform: translate(61px, -26px) scale(0.91); }
+    95% { transform: translate(71px, -14px) scale(0.95); }
+    100% { transform: translate(75px, 0px) scale(1); }
   }
 </style>
